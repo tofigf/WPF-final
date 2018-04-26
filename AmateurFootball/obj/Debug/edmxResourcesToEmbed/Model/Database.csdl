@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FootballModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Stadium">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Isreserved" Type="Int16" />
+    <NavigationProperty Name="Reserves" Relationship="FootballModel.FK_Reserves_Stadiums" FromRole="Stadium" ToRole="Reserve" />
+  </EntityType>
+  <EntityContainer Name="FootballEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Stadiums" EntityType="Self.Stadium" />
+    <EntitySet Name="Costumers" EntityType="FootballModel.Costumer" />
+    <EntitySet Name="Reserves" EntityType="FootballModel.Reserve" />
+    <AssociationSet Name="FK_Reserves_Reserves" Association="FootballModel.FK_Reserves_Reserves">
+      <End Role="Costumer" EntitySet="Costumers" />
+      <End Role="Reserve" EntitySet="Reserves" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reserves_Stadiums" Association="FootballModel.FK_Reserves_Stadiums">
+      <End Role="Stadium" EntitySet="Stadiums" />
+      <End Role="Reserve" EntitySet="Reserves" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Costumer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="Int32" />
+    <NavigationProperty Name="Reserves" Relationship="FootballModel.FK_Reserves_Reserves" FromRole="Costumer" ToRole="Reserve" />
+  </EntityType>
+  <EntityType Name="Reserve">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StadiumId" Type="Int32" Nullable="false" />
+    <Property Name="STime" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Etime" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="ReserervAcsessDate" Type="DateTime" Precision="3" />
+    <Property Name="Price" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="CostumerId" Type="Int32" Nullable="false" />
+    <Property Name="MatchDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Costumer" Relationship="FootballModel.FK_Reserves_Reserves" FromRole="Reserve" ToRole="Costumer" />
+    <NavigationProperty Name="Stadium" Relationship="FootballModel.FK_Reserves_Stadiums" FromRole="Reserve" ToRole="Stadium" />
+  </EntityType>
+  <Association Name="FK_Reserves_Reserves">
+    <End Type="FootballModel.Costumer" Role="Costumer" Multiplicity="1" />
+    <End Type="FootballModel.Reserve" Role="Reserve" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Costumer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Reserve">
+        <PropertyRef Name="CostumerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Reserves_Stadiums">
+    <End Type="FootballModel.Stadium" Role="Stadium" Multiplicity="1" />
+    <End Type="FootballModel.Reserve" Role="Reserve" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Stadium">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Reserve">
+        <PropertyRef Name="StadiumId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

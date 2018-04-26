@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="FootballModelStoreContainer" CdmEntityContainer="FootballEntities">
+    <EntitySetMapping Name="Stadiums">
+      <EntityTypeMapping TypeName="FootballModel.Stadium">
+        <MappingFragment StoreEntitySet="Stadiums">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Isreserved" ColumnName="Isreserved" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Costumers">
+      <EntityTypeMapping TypeName="FootballModel.Costumer">
+        <MappingFragment StoreEntitySet="Costumers">
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reserves">
+      <EntityTypeMapping TypeName="FootballModel.Reserve">
+        <MappingFragment StoreEntitySet="Reserves">
+          <ScalarProperty Name="MatchDate" ColumnName="MatchDate" />
+          <ScalarProperty Name="CostumerId" ColumnName="CostumerId" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="ReserervAcsessDate" ColumnName="ReserervAcsessDate" />
+          <ScalarProperty Name="Etime" ColumnName="Etime" />
+          <ScalarProperty Name="STime" ColumnName="STime" />
+          <ScalarProperty Name="StadiumId" ColumnName="StadiumId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

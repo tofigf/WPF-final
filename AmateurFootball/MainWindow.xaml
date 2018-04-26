@@ -1,0 +1,81 @@
+﻿<Window x:Class="AmateurFootball.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AmateurFootball"
+        mc:Ignorable="d"
+        Title="Footbal" Height="474.074" Width="1368.5">
+    <Window.Resources>
+        <AlternationConverter x:Key="AlternationConverter"/>
+    </Window.Resources>
+    <Grid Margin="10,0,-316,0" Height="440" VerticalAlignment="Top" HorizontalAlignment="Left" Width="1666">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="461*"/>
+            <ColumnDefinition Width="181*"/>
+            <ColumnDefinition Width="86*"/>
+            <ColumnDefinition Width="37*"/>
+            <ColumnDefinition Width="343*"/>
+        </Grid.ColumnDefinitions>
+        <ComboBox Name="cmbStadium" SelectionChanged="cmbStadium_SelectionChanged_1" HorizontalAlignment="Left" Margin="48,86,0,0" VerticalAlignment="Top" Width="168" Height="37"/>
+        <Label Content="Stadiums" HorizontalAlignment="Left" Margin="48,49,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.632,1.096" Height="32" Width="101"/>
+        <TextBox Name="txtCostumers" HorizontalAlignment="Left" Height="23" Margin="272,86,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Costumers" HorizontalAlignment="Left" Margin="272,49,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.171,0.577"/>
+        <Label Content="EndTime" HorizontalAlignment="Left" Margin="48,257,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.171,0.577"/>
+        <Label Content="StartTime" HorizontalAlignment="Left" Margin="44,145,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.171,0.577"/>
+        <TextBlock HorizontalAlignment="Left" Margin="282,124,0,0" TextWrapping="Wrap" Text="Phone" VerticalAlignment="Top" RenderTransformOrigin="0.602,-0.844"/>
+        <TextBox Name="txtPhone" HorizontalAlignment="Left" Height="23" Margin="272,145,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Button Content="Booking" FontSize="20" HorizontalAlignment="Left" Margin="78,375,0,0" VerticalAlignment="Top" Width="138" Click="Button_Click" RenderTransformOrigin="1.333,0.025" Height="44" FontWeight="Bold"/>
+        <DataGrid Name="dgReserv" AutoGenerateColumns="False" ItemsSource="{Binding ReservedView}" HorizontalAlignment="Left" Height="239" Margin="461,76,0,0" VerticalAlignment="Top" Width="761" Grid.ColumnSpan="5"  SelectedCellsChanged="dgReserv_SelectedCellsChanged">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path=Id}" Header="ID" Visibility="Hidden"/>
+                <DataGridTextColumn Binding="{Binding Path=Stadium}" Header="Stadium"/>
+                <DataGridTextColumn  Binding="{Binding Path=Stime}" Header="StartTime"/>
+                <DataGridTextColumn  Binding="{Binding Path=Etime}" Header="EndTime"/>
+                <DataGridTextColumn  Binding="{Binding Path=ReservAcsesstime}" Header="ReservTime"/>
+                <DataGridTextColumn  Binding="{Binding Path=Price}" Header="Price"/>
+                <DataGridTextColumn  Binding="{Binding Path=Costumer}" Header="Costumer"/>
+                <DataGridTextColumn  Binding="{Binding Path=Phone}" Header="Phone"/>
+                <DataGridTextColumn  Binding="{Binding Path=MatchDate}" Header="Match Date"/>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Click="Button_Click_3">Delete</Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Click="Button_Click_6">Update</Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Label Name="lblRooms" Content="" HorizontalAlignment="Left" Margin="48,278,0,0" VerticalAlignment="Top" Foreground="#FF91230A" FontSize="20" FontWeight="Bold"/>
+        <TextBlock Name="lblError" HorizontalAlignment="Left" Margin="430,362,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" RenderTransformOrigin="0.602,-0.844" Foreground="#FFC50E0E" FontSize="20" FontWeight="Bold"/>
+        <TextBlock Name="tbPrice" HorizontalAlignment="Left" Margin="282,201,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Foreground="#FF2414C3" FontWeight="Bold" FontSize="20"/>
+        <ComboBox x:Name="cmbTest"  HorizontalAlignment="Left" Margin="48,176,0,0" VerticalAlignment="Top" Width="168" Height="37" SelectionChanged="cmbTest_SelectionChanged" Loaded="cmbTest_Loaded"/>
+        <ComboBox x:Name="cmbETimeTest" HorizontalAlignment="Left" Margin="48,288,0,0" VerticalAlignment="Top" Width="168" Height="37" Loaded="cmbETimeTest_Loaded" SelectionChanged="cmbETimeTest_SelectionChanged"/>
+        <DatePicker Name="dpMatchDate"   SelectedDateFormat="Short"  HorizontalAlignment="Left" Margin="282,298,0,0" VerticalAlignment="Top" Height="27" Width="110" FirstDayOfWeek="Monday"/>
+        <TextBlock HorizontalAlignment="Left" Margin="282,267,0,0" TextWrapping="Wrap" Text="Match Date" VerticalAlignment="Top" RenderTransformOrigin="0.602,-0.844"/>
+        <DatePicker Name="dpSearch" HorizontalAlignment="Left" Margin="0,388,0,0" VerticalAlignment="Top" Width="142" RenderTransformOrigin="1.035,0.625" Grid.Column="3" Grid.ColumnSpan="2"/>
+        <DataGrid Name="dgSearch" HorizontalAlignment="Left"  ItemsSource="{Binding ReservedView}" Height="100" Margin="461,330,0,0" VerticalAlignment="Top" Width="565" Grid.ColumnSpan="3">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path=Id}" Header="ID" Visibility="Hidden"/>
+                <DataGridTextColumn Binding="{Binding Path=Stadium}" Header="Stadium"/>
+                <DataGridTextColumn  Binding="{Binding Path=Stime}" Header="StartTime"/>
+                <DataGridTextColumn  Binding="{Binding Path=Etime}" Header="EndTime"/>
+                <DataGridTextColumn  Binding="{Binding Path=ReservAcsesstime}" Header="ReservTime"/>
+                <DataGridTextColumn  Binding="{Binding Path=Price}" Header="Price"/>
+                <DataGridTextColumn  Binding="{Binding Path=Costumer}" Header="Costumer"/>
+                <DataGridTextColumn  Binding="{Binding Path=Phone}" Header="Phone"/>
+                <DataGridTextColumn  Binding="{Binding Path=MatchDate}" Header="Match Date"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Search" FontSize="20" HorizontalAlignment="Left" Margin="0,330,0,0" VerticalAlignment="Top" Width="88" Click="Button_Click_1" RenderTransformOrigin="1.333,0.025" Height="44" FontWeight="Bold" Grid.Column="3" Grid.ColumnSpan="2"/>
+    </Grid>
+</Window>
